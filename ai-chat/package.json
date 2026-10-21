@@ -1,0 +1,42 @@
+{
+  "name": "helloagents-chat",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "HelloAgents 对话：Web / Tauri 双端 AI 聊天前端",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "vue-tsc --noEmit",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173",
+    "lint": "eslint .",
+    "icon": "tauri icon prototypes/app-icon.svg && node scripts/sync-favicon.mjs",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.2.0",
+    "@tauri-apps/plugin-store": "^2.2.0",
+    "dompurify": "^3.2.4",
+    "highlight.js": "^11.11.1",
+    "markdown-it": "^14.1.0",
+    "pinia": "^3.0.1",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@tauri-apps/cli": "^2.2.0",
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^22.10.7",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "eslint": "^9.19.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "globals": "^15.14.0",
+    "typescript": "~5.6.3",
+    "typescript-eslint": "^8.22.0",
+    "vite": "^6.1.0",
+    "vue-tsc": "^2.2.0"
+  },
+  "packageManager": "pnpm@9.15.4"
+}

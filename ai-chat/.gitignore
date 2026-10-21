@@ -1,0 +1,15 @@
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+.env
+.env.local
+.env.*.local
+src-tauri/target/
+src-tauri/gen/
+src-tauri/icons/
+*.log
+.DS_Store
+src-tauri/binaries/
+release/

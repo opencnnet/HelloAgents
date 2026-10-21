@@ -1,0 +1,279 @@
+/* AI 回复 Markdown 的正文、表格与代码块排版。 */
+.md-body {
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.md-body > :first-child {
+  margin-top: 0;
+}
+
+.md-body > :last-child {
+  margin-bottom: 0;
+}
+
+.md-body p {
+  margin: 0 0 0.8em;
+}
+
+.md-body strong {
+  font-weight: 600;
+}
+
+.md-body em {
+  font-style: italic;
+}
+
+.md-body h1,
+.md-body h2,
+.md-body h3,
+.md-body h4 {
+  margin: 1.2em 0 0.45em;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.md-body h1 {
+  font-size: 1.35em;
+}
+
+.md-body h2 {
+  font-size: 1.22em;
+}
+
+.md-body h3 {
+  font-size: 1.1em;
+}
+
+.md-body h4 {
+  font-size: 1em;
+}
+
+.md-body ul,
+.md-body ol {
+  margin: 0.2em 0 0.9em;
+  padding-left: 1.45em;
+}
+
+.md-body li {
+  margin: 0.2em 0;
+}
+
+.md-body li > p {
+  margin-bottom: 0.35em;
+}
+
+.md-body blockquote {
+  margin: 0.4em 0 0.9em;
+  padding: 2px 0 2px 14px;
+  border-left: 3px solid var(--primary);
+  color: var(--text-secondary);
+}
+
+.md-body blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.md-body hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 1.2em 0;
+}
+
+.md-body a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.md-body a:hover {
+  color: var(--primary-hover);
+}
+
+.md-body code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  padding: 1px 5px;
+  border-radius: 6px;
+  background: var(--bg-soft);
+}
+
+.md-body .code-block {
+  margin: 0.4em 0 1em;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--code-bg);
+  overflow: hidden;
+  font-family: var(--font-ui);
+}
+
+.md-body .code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--code-head);
+}
+
+.md-body .code-lang {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.md-body .code-copy {
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.md-body .code-copy:hover {
+  color: var(--primary);
+  background: var(--primary-wash);
+}
+
+.md-body pre.code-pre {
+  margin: 0;
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  background: transparent;
+}
+
+.md-body pre.code-pre code {
+  padding: 0;
+  background: transparent;
+  font-size: inherit;
+  border-radius: 0;
+}
+
+.md-body table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0.3em 0 1em;
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.md-body th,
+.md-body td {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.md-body th {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
+  background: var(--bg-soft);
+}
+
+.md-body img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* highlight.js 配色（GitHub 风格，明暗各一套） */
+.md-body .hljs-comment,
+.md-body .hljs-quote {
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.md-body .hljs-keyword,
+.md-body .hljs-selector-tag,
+.md-body .hljs-literal,
+.md-body .hljs-built_in {
+  color: #cf222e;
+}
+
+.md-body .hljs-string,
+.md-body .hljs-attr,
+.md-body .hljs-template-tag,
+.md-body .hljs-template-variable {
+  color: #0a3069;
+}
+
+.md-body .hljs-number,
+.md-body .hljs-symbol,
+.md-body .hljs-bullet {
+  color: #0550ae;
+}
+
+.md-body .hljs-title,
+.md-body .hljs-section,
+.md-body .hljs-function .hljs-title {
+  color: #8250df;
+}
+
+.md-body .hljs-type,
+.md-body .hljs-class .hljs-title,
+.md-body .hljs-title.class_ {
+  color: #953800;
+}
+
+.md-body .hljs-tag,
+.md-body .hljs-name,
+.md-body .hljs-attribute {
+  color: #116329;
+}
+
+.md-body .hljs-meta {
+  color: var(--text-tertiary);
+}
+
+.md-body .hljs-emphasis {
+  font-style: italic;
+}
+
+.md-body .hljs-strong {
+  font-weight: 600;
+}
+
+html[data-theme='dark'] .md-body .hljs-keyword,
+html[data-theme='dark'] .md-body .hljs-selector-tag,
+html[data-theme='dark'] .md-body .hljs-literal,
+html[data-theme='dark'] .md-body .hljs-built_in {
+  color: #ff7b72;
+}
+
+html[data-theme='dark'] .md-body .hljs-string,
+html[data-theme='dark'] .md-body .hljs-attr {
+  color: #a5d6ff;
+}
+
+html[data-theme='dark'] .md-body .hljs-number {
+  color: #79c0ff;
+}
+
+html[data-theme='dark'] .md-body .hljs-title,
+html[data-theme='dark'] .md-body .hljs-section,
+html[data-theme='dark'] .md-body .hljs-function .hljs-title {
+  color: #d2a8ff;
+}
+
+html[data-theme='dark'] .md-body .hljs-type,
+html[data-theme='dark'] .md-body .hljs-title.class_ {
+  color: #ffa657;
+}
+
+html[data-theme='dark'] .md-body .hljs-tag,
+html[data-theme='dark'] .md-body .hljs-name,
+html[data-theme='dark'] .md-body .hljs-attribute {
+  color: #7ee787;
+}

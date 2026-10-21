@@ -1,0 +1,68 @@
+/* 中性浅色主题与品牌强调色；暗色主题作为备选。 */
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-sidebar: #f9f9f9;
+  --bg-soft: #f4f4f4;
+  --bg-hover: #ececec;
+  --bg-active: #e8e8e8;
+  --bg-raised: #ffffff;
+  --text: #202123;
+  --text-secondary: #41434a;
+  --text-tertiary: #777980;
+  --border: #e5e5e5;
+  --border-strong: #d6d6d6;
+  --primary: #4d6bfe;
+  --primary-hover: #3b5af5;
+  --primary-wash: #eef2ff;
+  --user-bubble: #f4f4f4;
+  --danger: #d92d20;
+  --danger-line: #f3c5c1;
+  --danger-wash: #fef3f2;
+  --success: #12b76a;
+  --success-wash: rgba(18, 183, 106, 0.12);
+  --scroll-thumb: #d5d8de;
+  --overlay: rgba(21, 23, 28, 0.42);
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.06);
+  --shadow-dialog: 0 24px 64px rgba(16, 24, 40, 0.18);
+  --code-bg: #f8f9fb;
+  --code-head: #fbfbfd;
+  --font-ui: -apple-system, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC',
+    sans-serif;
+  --font-mono: 'Cascadia Code', 'JetBrains Mono', Consolas, 'Courier New', monospace;
+  --sidebar-width: 260px;
+  --sidebar-rail-width: 56px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 24px;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #1b1c1f;
+  --bg-sidebar: #212226;
+  --bg-soft: #26282c;
+  --bg-hover: #2b2d32;
+  --bg-active: #323338;
+  --bg-raised: #202125;
+  --text: #e8eaed;
+  --text-secondary: #a8adb7;
+  --text-tertiary: #80858f;
+  --border: #32343a;
+  --border-strong: #41444b;
+  --primary: #7b8cff;
+  --primary-hover: #93a1ff;
+  --primary-wash: #262c44;
+  --user-bubble: #29344e;
+  --danger: #ff7a7a;
+  --danger-line: #5a3538;
+  --danger-wash: #2f2325;
+  --success: #3ddc97;
+  --success-wash: rgba(61, 220, 151, 0.14);
+  --scroll-thumb: #3d4047;
+  --overlay: rgba(0, 0, 0, 0.55);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-dialog: 0 24px 64px rgba(0, 0, 0, 0.5);
+  --code-bg: #24262a;
+  --code-head: #292b30;
+}
