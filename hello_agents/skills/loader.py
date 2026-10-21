@@ -122,7 +122,7 @@ class SkillLoader:
             解析后的元数据字典，如果解析失败则返回 None
         """
         try:
-            content = path.read_text(encoding="utf-8")
+            content = path.read_text(encoding="utf-8-sig")
         except (OSError, UnicodeError) as exc:
             self._diagnose(path, f"无法读取技能文件: {exc}")
             return None
@@ -199,7 +199,7 @@ class SkillLoader:
 
         # 读取完整内容
         try:
-            content = metadata["path"].read_text(encoding="utf-8")
+            content = metadata["path"].read_text(encoding="utf-8-sig")
         except (OSError, UnicodeError) as exc:
             self._diagnose(metadata["path"], f"无法读取技能文件: {exc}")
             return None

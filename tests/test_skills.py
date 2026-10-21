@@ -62,6 +62,23 @@ $ARGUMENTS
         assert "test-skill" in loader.list_skills()
         assert len(loader.metadata_cache) == 1
 
+    def test_scan_skill_with_bom(self, temp_skills_dir):
+        """带 UTF-8 BOM 的 SKILL.md（Windows 常见）应正常解析"""
+        skill_dir = temp_skills_dir / "bom-skill"
+        skill_dir.mkdir()
+        (skill_dir / "SKILL.md").write_text(
+            "---\nname: bom-skill\ndescription: 带 BOM 的技能\n---\n\n正文\n",
+            encoding="utf-8-sig",
+        )
+
+        loader = SkillLoader(skills_dir=temp_skills_dir)
+
+        assert "bom-skill" in loader.list_skills()
+        skill = loader.get_skill("bom-skill")
+        assert skill is not None
+        assert skill.description == "带 BOM 的技能"
+        assert skill.body == "正文"
+
     def test_get_descriptions(self, temp_skills_dir, sample_skill):
         """测试获取技能描述"""
         loader = SkillLoader(skills_dir=temp_skills_dir)

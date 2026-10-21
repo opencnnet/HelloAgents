@@ -30,6 +30,8 @@ fastembed = ["qdrant-client>=1.19.1,<1.20", "fastembed>=0.8.1,<0.9"]
 graphrag = ["igraph>=1.0.0,<1.1", "leidenalg>=0.12.0,<0.13"]
 gemini = ["google-genai>=2.28.0,<2.29"]
 anthropic = ["anthropic>=1.11.0,<1.12"]
+# 桌面端打包：把示例后端冻结为 sidecar 可执行文件。
+desktop = ["pyinstaller>=6.11,<7"]
 
 [tool.uv]
 required-version = ">=0.12.23,<0.13"

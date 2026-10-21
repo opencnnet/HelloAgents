@@ -2,6 +2,7 @@
 
 import time
 import asyncio
+import inspect
 import json
 import queue as thread_queue
 import threading
@@ -444,6 +445,21 @@ class OpenAIAdapter(BaseLLMAdapter):
             latency_ms=int((time.monotonic() - started) * 1000))
 
 
+def _fit_sdk_params(target: Any, params: Dict[str, Any]) -> Dict[str, Any]:
+    """按 SDK 方法签名裁剪参数，兼容不同版本（如新版 anthropic 不再接受 temperature）。"""
+    try:
+        signature = inspect.signature(target)
+    except (TypeError, ValueError):
+        return params
+    if any(
+        parameter.kind is inspect.Parameter.VAR_KEYWORD
+        for parameter in signature.parameters.values()
+    ):
+        return params
+    allowed = set(signature.parameters) - {"self"}
+    return {key: value for key, value in params.items() if key in allowed}
+
+
 class AnthropicAdapter(BaseLLMAdapter):
     """Anthropic Claude适配器
 
@@ -502,14 +518,24 @@ class AnthropicAdapter(BaseLLMAdapter):
                     "content": content_blocks,
                 })
             elif msg["role"] == "tool":
-                converted_messages.append({
-                    "role": "user",
-                    "content": [{
-                        "type": "tool_result",
-                        "tool_use_id": msg.get("tool_call_id"),
-                        "content": msg.get("content", ""),
-                    }],
-                })
+                block = {
+                    "type": "tool_result",
+                    "tool_use_id": msg.get("tool_call_id"),
+                    "content": msg.get("content", ""),
+                }
+                # Anthropic 要求同一批 tool_use 的结果放在同一条 user 消息里，
+                # 并行工具调用会产生多条 role=tool，这里合并而不是逐条追加。
+                previous = converted_messages[-1] if converted_messages else None
+                if (
+                    previous is not None
+                    and previous["role"] == "user"
+                    and isinstance(previous["content"], list)
+                    and previous["content"]
+                    and previous["content"][0].get("type") == "tool_result"
+                ):
+                    previous["content"].append(block)
+                else:
+                    converted_messages.append({"role": "user", "content": [block]})
             else:
                 converted_messages.append(msg)
 
@@ -566,7 +592,9 @@ class AnthropicAdapter(BaseLLMAdapter):
             if system_content:
                 request_params["system"] = system_content
 
-            response = self._client.messages.create(**request_params)
+            response = self._client.messages.create(
+                **_fit_sdk_params(self._client.messages.create, request_params)
+            )
 
             latency_ms = int((time.time() - start_time) * 1000)
 
@@ -616,7 +644,9 @@ class AnthropicAdapter(BaseLLMAdapter):
 
             usage = {}
 
-            with self._client.messages.stream(**request_params) as stream:
+            with self._client.messages.stream(
+                **_fit_sdk_params(self._client.messages.stream, request_params)
+            ) as stream:
                 for text in stream.text_stream:
                     yield text
 
@@ -662,7 +692,9 @@ class AnthropicAdapter(BaseLLMAdapter):
             if tool_choice:
                 request_params["tool_choice"] = tool_choice
 
-            response = self._client.messages.create(**request_params)
+            response = self._client.messages.create(
+                **_fit_sdk_params(self._client.messages.create, request_params)
+            )
             latency_ms = int((time.time() - start_time) * 1000)
 
             content = ""
